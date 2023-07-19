@@ -32,10 +32,9 @@ body {
 
 .hotslot-wrapper {
   display: grid;
-  width: 110px;
+  width: $gridSize;
   height: fit-content;
   grid-template-rows: repeat(5, $gridSize);
-  // margin-top: 50px;
   gap: $gridGap;
 }
 
