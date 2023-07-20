@@ -5,7 +5,7 @@ import { Items } from '../../store/items';
 import { Locale } from '../../store/locale';
 import ReactMarkdown from 'react-markdown';
 import { useAppSelector } from '../../store';
-import { imagepath } from '../../store/imagepath';
+import { getItemUrl } from '../../helpers';
 import ClockIcon from '../utils/icons/ClockIcon';
 
 const SlotTooltip: React.FC<{ item: SlotWithItem; inventory: Inventory }> = ({ item, inventory }) => {
@@ -98,7 +98,7 @@ const SlotTooltip: React.FC<{ item: SlotWithItem; inventory: Inventory }> = ({ i
                   const [item, count] = [ingredient[0], ingredient[1]];
                   return (
                     <div className="tooltip-ingredient" key={`ingredient-${item}`}>
-                      <img src={`${imagepath}/${item}.png`} />
+                      <img src={item ? getItemUrl(item) : 'none'} alt="item-image" />
                       <p>
                         {count >= 1
                           ? `${count}x ${Items[item]?.label || item}`

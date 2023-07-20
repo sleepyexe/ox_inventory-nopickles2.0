@@ -13,7 +13,6 @@ import { Locale } from '../../store/locale';
 import { Tooltip } from '@mui/material';
 import SlotTooltip from './SlotTooltip';
 import { setContextMenu } from '../../store/inventory';
-import { imagepath } from '../../store/imagepath';
 import { onCraft } from '../../dnd/onCraft';
 
 interface SlotProps {
@@ -43,7 +42,7 @@ const InventorySlot: React.FC<SlotProps> = ({ inventory, item }) => {
                 name: item.name,
                 slot: item.slot,
               },
-              image: item?.name ? getItemUrl(item as SlotWithItem) : 'none',
+              image: item?.name && `url(${getItemUrl(item) || 'none'}`,
             }
           : null,
       canDrag,
@@ -131,7 +130,7 @@ const InventorySlot: React.FC<SlotProps> = ({ inventory, item }) => {
               ? 'brightness(80%) grayscale(100%)'
               : undefined,
           opacity: isDragging ? 0.4 : 1.0,
-          backgroundImage: getItemUrl(item as SlotWithItem) || 'none',
+          backgroundImage: `url(${item?.name ? getItemUrl(item as SlotWithItem) : 'none'}`,
           border: isOver ? '1px solid rgba(37,39,43,0.4)' : '',
         }}
       >
@@ -160,7 +159,7 @@ const InventorySlot: React.FC<SlotProps> = ({ inventory, item }) => {
                   item?.currency ? (
                     <div className="item-slot-currency-wrapper">
                       <img
-                        src={item?.currency ? `${`${imagepath}/${item?.currency}.png`}` : ''}
+                        src={item.currency ? getItemUrl(item.currency) : 'none'}
                         alt="item-image"
                         style={{
                           imageRendering: '-webkit-optimize-contrast',

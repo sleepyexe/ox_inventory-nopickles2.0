@@ -2,17 +2,15 @@ if not lib then return end
 
 local CraftingBenches = {}
 local Items = require 'modules.items.client'
-local locations = shared.target == 'ox_target' and 'zones' or 'points'
 local createBlip = require 'modules.utils.client'.CreateBlip
 
 ---@param id number
 ---@param data table
 local function createCraftingBench(id, data)
 	CraftingBenches[id] = {}
-	local benchLocations = data[locations]
 	local recipes = data.items
 
-	if recipes and benchLocations then
+	if recipes then
 		data.slots = #recipes
 
 		for i = 1, data.slots do
@@ -36,33 +34,34 @@ local function createCraftingBench(id, data)
 
 		if shared.target == 'ox_target' then
 			data.points = nil
-
-			for i = 1, #data.zones do
-				local zone = data.zones[i]
-				zone.name = ("craftingbench_%s:%s"):format(id, i)
-				zone.id = id
-				zone.index = i
-				zone.options = {
-					{
-						label = zone.label or locale('open_crafting_bench'),
-						canInteract = data.groups and function()
-							return client.hasGroup(data.groups)
-						end or nil,
-						onSelect = function()
-							client.openInventory('crafting', { id = id, index = i })
-						end,
-						distance = zone.distance or 2.0,
-						icon = zone.icon or 'fas fa-wrench',
-					}
-				}
-
-				exports.ox_target:addBoxZone(zone)
-
-				if blip then
-					createBlip(blip, zone.coords)
-				end
-			end
-		else
+            if data.zones then
+    			for i = 1, #data.zones do
+    				local zone = data.zones[i]
+    				zone.name = ("craftingbench_%s:%s"):format(id, i)
+    				zone.id = id
+    				zone.index = i
+    				zone.options = {
+    					{
+    						label = zone.label or locale('open_crafting_bench'),
+    						canInteract = data.groups and function()
+    							return client.hasGroup(data.groups)
+    						end or nil,
+    						onSelect = function()
+    							client.openInventory('crafting', { id = id, index = i })
+    						end,
+    						distance = zone.distance or 2.0,
+    						icon = zone.icon or 'fas fa-wrench',
+    					}
+    				}
+    
+    				exports.ox_target:addBoxZone(zone)
+    
+    				if blip then
+    					createBlip(blip, zone.coords)
+    				end
+    			end
+            end
+		elseif data.points then
 			data.zones = nil
 
 			---@param point CPoint

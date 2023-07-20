@@ -286,15 +286,20 @@ button:active {
 }
 
 .inventory-slot-number {
-  background-color: white;
-  color: black;
-  height: 12px;
-  border-top-left-radius: 0.25vh;
-  border-bottom-right-radius: 0.25vh;
-  padding: 3px;
-  font-size: 12px;
-  font-family: $mainFont;
+  position: absolute;
+  color: rgb(245, 245, 245);
+  font-size: 8vh;
+  left: 0;
+  right: 0;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: auto;
+  // opacity: 0.2;
+  font-weight: 300;
+  text-align: center;
+  font-family: Poppins;
 }
+
 
 .item-slot-wrapper {
   display: flex;
