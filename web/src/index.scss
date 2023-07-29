@@ -34,6 +34,7 @@ body {
   display: grid;
   width: $gridSize;
   height: fit-content;
+  grid-template-columns: repeat(1, $gridSize);
   grid-template-rows: repeat(5, $gridSize);
   gap: $gridGap;
 }
