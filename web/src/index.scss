@@ -151,25 +151,52 @@ button:active {
 
 .inventory-control {
   display: flex;
-  width: 4rem;
-  margin-right: 1rem;
+  margin-top: 5rem;
+  .inventory-control-wrapper {
+    display: flex;
+    padding: 1rem;
+    gap: 10px;
+    align-items: center;
+    flex-direction: column;
+    justify-content: center;
+    border-radius: 5px;
+  }
 
   .inventory-control-input {
     transition: 200ms;
-    padding: 16px 8px;
+    padding: 0.4rem 0;
     border-radius: 5px;
+    height: 2.7vh;
+    width: 10vh;
     font-family: $mainFont;
-    margin-top: 3.5rem;
-    font-size: 14px;
+    font-size: 16px;
     text-align: center;
     outline: none;
-    border: none;
+    border: solid 0.5px;
+    border-color: #c1c2c55a;
     color: #fff;
-    background-color: #16161a;
+    background-color: $seconaryColor;
     &:focus-within {
-      background-color: #191920;
+      background-color: $secondaryColorDark;
     }
-    width: 100%;
+  }
+
+  .inventory-control-button {
+    transition: 0.2s;
+    text-transform: uppercase;
+    height: 2.7em;
+    width: 10vh;
+    font-family: $mainFont;
+    font-size: 1.5vh;
+    outline: none;
+    border: solid 0.5px;
+    border-color: #c1c2c55a;
+    border-radius: 5px;
+    color: #c1c2c5;
+    background-color: #fff0;
+    &:hover {
+      background-color: $secondaryColorDark;
+    }
   }
 }
 
